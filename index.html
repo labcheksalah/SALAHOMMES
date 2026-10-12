@@ -1,172 +1,816 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SALAHOMMES | أزياء رجالية</title>
-  <meta name="description" content="اكتشف تشكيلة SALAHOMMES من الملابس الرجالية الكلاسيكية في الجزائر.">
-  <style>
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f8f7f4;
-      color: #202020;
-    }
-    header {
-      background: #171717;
-      color: white;
-      padding: 22px 16px;
-      text-align: center;
-    }
-    .logo {
-      font-size: 29px;
-      font-weight: bold;
-      letter-spacing: 3px;
-      color: #d6bd87;
-    }
-    header p { color: #ddd; margin-bottom: 0; }
-    nav {
-      background: #252525;
-      padding: 12px;
-      text-align: center;
-    }
-    nav a {
-      color: white;
-      text-decoration: none;
-      margin: 0 12px;
-      font-size: 14px;
-    }
-    .hero {
-      padding: 55px 20px;
-      text-align: center;
-      background: linear-gradient(135deg, #e8e0d2, #faf8f2);
-    }
-    .hero h1 { font-size: 32px; margin: 0 0 14px; }
-    .hero p { line-height: 1.9; }
-    .button {
-      display: inline-block;
-      background: #171717;
-      color: white;
-      padding: 13px 22px;
-      border-radius: 4px;
-      text-decoration: none;
-      margin-top: 12px;
-    }
-    main { padding: 28px 16px; max-width: 1100px; margin: auto; }
-    h2 { text-align: center; margin-bottom: 25px; }
-    .products {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 20px;
-    }
-    .product {
-      background: white;
-      border: 1px solid #e7e3dc;
-      border-radius: 7px;
-      overflow: hidden;
-      padding-bottom: 18px;
-      text-align: center;
-    }
-    .product img {
-      width: 100%;
-      height: 260px;
-      object-fit: cover;
-      display: block;
-      background: #eee9e0;
-    }
-    .product h3 { margin: 16px 8px 8px; }
-    .price { color: #876c3e; font-weight: bold; font-size: 19px; }
-    .product .button { margin-top: 8px; }
-    .about {
-      background: #eeebe5;
-      padding: 28px 20px;
-      text-align: center;
-      line-height: 2;
-      margin-top: 35px;
-    }
-    footer {
-      background: #171717;
-      color: white;
-      text-align: center;
-      padding: 25px 15px;
-      line-height: 2;
-    }
-    footer a { color: #d6bd87; }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SALAHOMMES | ملابس رجالية - Mode homme, Blida</title>
+<meta name="description" content="SALAHOMMES: chemises, pantalons, vestes, costumes et manteaux pour homme. Livraison dans 58 wilayas, paiement à la livraison.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@500;700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+
+<!--
+=====================================================================
+ SALAHOMMES - واجهة المتجر (Front-end فقط)
+=====================================================================
+ يعمل الآن داخل المتصفح (بدون خادم):
+   - عرض المنتجات، البحث، الفلاتر (الفئة/المقاس/اللون/السعر/العروض)
+   - اختيار المقاس واللون، سلة مشتريات (تُحفظ في المتصفح)
+   - نموذج الطلب مع 58 ولاية وحساب سعر التوصيل (أسعار تجريبية)
+   - تبديل اللغة عربي / فرنسي
+   - تجهيز رسالة طلب جاهزة للإرسال عبر واتساب
+
+ لا يعمل بدون خدمة إضافية (غير منفّذ هنا):
+   - حفظ الطلبات في قاعدة بيانات  -> يحتاج Backend + DB (CONFIG.ORDER_ENDPOINT)
+   - لوحة تحكم الإدارة (إضافة/تعديل المنتجات والطلبات) -> غير موجودة
+   - ربط ZR Express (إنشاء الشحنات، التتبع، التعرفة الحقيقية) -> غير مربوط
+   - منتجات حقيقية وصور -> قائمة PRODUCTS أدناه تجريبية
+=====================================================================
+-->
+
+<style>
+:root{
+  --ink:#0c0b09;
+  --coal:#17150f;
+  --smoke:#242117;
+  --gold:#c9a24b;
+  --gold-hi:#e6cf94;
+  --bone:#f1eadb;
+  --mute:#a79e8a;
+  --line:rgba(201,162,75,.28);
+  --danger:#e0806b;
+  --ok:#8fbf8a;
+  --r:4px;
+  --font-d:"Reem Kufi","Tajawal",Georgia,serif;
+  --font-b:"Tajawal","Segoe UI",Tahoma,Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{background:var(--ink);color:var(--bone);font:400 16px/1.7 var(--font-b);-webkit-font-smoothing:antialiased}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer;background:none;border:0}
+img,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--gold-hi);outline-offset:3px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.wrap{width:min(1240px,100% - 32px);margin-inline:auto}
+
+/* demo notice */
+.demo{background:var(--gold);color:#1a1405;font-size:14px;text-align:center;padding:6px 40px;position:relative}
+.demo button{position:absolute;inset-inline-end:10px;top:50%;translate:0 -50%;font-size:20px;line-height:1;color:#1a1405;padding:2px 8px}
+
+/* header */
+header.top{position:sticky;top:0;z-index:30;background:rgba(12,11,9,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;gap:16px;min-height:68px}
+.brand{display:flex;align-items:center;gap:10px;flex:none}
+.brand svg{width:40px;height:40px}
+.brand b{font:700 21px/1 var(--font-d);letter-spacing:.14em;color:var(--gold-hi)}
+.search{flex:1;max-width:460px;margin-inline:auto;position:relative}
+.search input{width:100%;background:var(--coal);border:1px solid var(--line);border-radius:var(--r);padding:9px 40px 9px 14px;padding-inline:14px 42px}
+.search input::placeholder{color:var(--mute)}
+.search svg{position:absolute;inset-inline-end:12px;top:50%;translate:0 -50%;width:18px;height:18px;color:var(--gold);pointer-events:none}
+.tools{display:flex;gap:8px;flex:none}
+.btn-i{height:42px;min-width:42px;padding:0 12px;border:1px solid var(--line);border-radius:var(--r);display:inline-flex;align-items:center;justify-content:center;gap:8px;font-weight:500}
+.btn-i:hover{border-color:var(--gold)}
+.btn-i svg{width:20px;height:20px}
+.count{background:var(--gold);color:#1a1405;border-radius:99px;font-size:12px;font-weight:700;min-width:20px;height:20px;display:grid;place-items:center;padding:0 5px}
+
+/* hero */
+.hero{border-bottom:1px solid var(--line);background:
+  radial-gradient(900px 380px at 80% -10%,rgba(201,162,75,.16),transparent 70%),var(--ink)}
+.hero .wrap{padding-block:clamp(48px,9vw,110px) 0}
+.hero h1{font:700 clamp(44px,11vw,150px)/.95 var(--font-d);letter-spacing:.06em;color:var(--gold-hi);direction:ltr;text-align:start}
+html[dir=rtl] .hero h1{text-align:right}
+.hero p{max-width:34em;margin-top:22px;font-size:clamp(17px,2.2vw,21px);color:var(--bone)}
+.hero p small{display:block;color:var(--mute);font-size:15px;margin-top:6px}
+.cta{display:inline-block;margin-top:28px;background:var(--gold);color:#1a1405;font-weight:700;padding:13px 30px;border-radius:var(--r)}
+.cta:hover{background:var(--gold-hi)}
+.tape{margin-top:clamp(40px,7vw,80px);direction:ltr;position:relative;height:46px;color:var(--gold);
+  background:
+   repeating-linear-gradient(90deg,var(--gold) 0 1.5px,transparent 1.5px 60px) top/100% 30px no-repeat,
+   repeating-linear-gradient(90deg,var(--gold) 0 1px,transparent 1px 12px) top/100% 14px no-repeat;
+  border-top:2px solid var(--gold)}
+.tape span{position:absolute;top:26px;font:500 13px/1 var(--font-b);translate:-50% 0;padding-top:4px}
+.tape span:nth-child(1){left:60px}.tape span:nth-child(2){left:120px}.tape span:nth-child(3){left:180px}
+.tape span:nth-child(4){left:240px}.tape span:nth-child(5){left:300px}
+@media(max-width:520px){.tape span:nth-child(n+4){display:none}}
+
+/* cats */
+.cats{padding-block:30px 6px;display:flex;flex-wrap:wrap;gap:10px}
+.chip{padding:8px 18px;border:1px solid var(--line);border-radius:99px;font-weight:500;color:var(--bone)}
+.chip:hover{border-color:var(--gold)}
+.chip[aria-pressed=true]{background:var(--gold);color:#1a1405;border-color:var(--gold);font-weight:700}
+.chip.promo{border-color:var(--gold-hi);color:var(--gold-hi)}
+.chip.promo[aria-pressed=true]{color:#1a1405}
+
+/* shop layout */
+.shop{display:grid;grid-template-columns:260px 1fr;gap:28px;padding-block:22px 70px;align-items:start}
+@media(max-width:860px){.shop{grid-template-columns:1fr}}
+.filters{border:1px solid var(--line);border-radius:var(--r);background:var(--coal);padding:4px 18px 16px;position:sticky;top:84px}
+@media(max-width:860px){.filters{position:static}}
+.filters summary{list-style:none;cursor:pointer;font:700 17px var(--font-d);padding:14px 0;display:flex;justify-content:space-between}
+.filters summary::-webkit-details-marker{display:none}
+.fgroup{padding-top:14px;border-top:1px solid var(--line);margin-top:6px}
+.fgroup h3{font:500 15px var(--font-b);color:var(--gold-hi);margin-bottom:10px}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opt{min-width:42px;padding:5px 11px;border:1px solid var(--line);border-radius:var(--r);font-size:14px;text-align:center}
+.opt[aria-pressed=true]{background:var(--bone);color:#16130b;border-color:var(--bone);font-weight:700}
+.sw{width:30px;height:30px;border-radius:50%;border:2px solid var(--line);padding:0}
+.sw[aria-pressed=true]{border-color:var(--gold-hi);box-shadow:0 0 0 2px var(--ink),0 0 0 4px var(--gold-hi)}
+.range{width:100%;accent-color:var(--gold)}
+.rv{display:flex;justify-content:space-between;color:var(--mute);font-size:14px}
+.reset{margin-top:16px;color:var(--gold-hi);text-decoration:underline;font-size:14px}
+
+.head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px;flex-wrap:wrap}
+.head p{color:var(--mute)}
+.sort{background:var(--coal);border:1px solid var(--line);border-radius:var(--r);padding:8px 12px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:20px}
+.card{background:var(--coal);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column;text-align:start;transition:border-color .2s}
+.card:hover{border-color:var(--gold)}
+.pic{aspect-ratio:4/5;position:relative;display:grid;place-items:center;background:var(--tone,#222)}
+.pic::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 40%,rgba(0,0,0,.45))}
+.pic svg{width:56%;color:rgba(241,234,219,.82);stroke-width:1.6;z-index:1}
+.pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.badge{position:absolute;z-index:2;top:10px;inset-inline-start:10px;background:var(--gold);color:#1a1405;font-weight:700;font-size:13px;padding:2px 10px;border-radius:99px}
+.info{padding:14px 14px 16px;display:grid;gap:6px}
+.info h3{font:500 17px/1.35 var(--font-b)}
+.price{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.price b{font-size:18px;color:var(--gold-hi)}
+.price s{color:var(--mute);font-size:14px}
+.dots{display:flex;gap:5px}
+.dots i{width:12px;height:12px;border-radius:50%;border:1px solid var(--line)}
+.empty{grid-column:1/-1;border:1px dashed var(--line);border-radius:var(--r);padding:44px 20px;text-align:center;color:var(--mute)}
+.empty button{color:var(--gold-hi);text-decoration:underline;margin-top:8px}
+
+/* delivery */
+.delivery{border-block:1px solid var(--line);background:var(--coal);padding-block:56px}
+.delivery h2,.sec-t{font:700 clamp(26px,4vw,38px)/1.2 var(--font-d);color:var(--gold-hi);margin-bottom:14px}
+.delivery .cols{display:grid;grid-template-columns:1fr 1fr;gap:36px}
+@media(max-width:760px){.delivery .cols{grid-template-columns:1fr}}
+.delivery p{color:var(--bone);max-width:36em}
+.delivery p+p{margin-top:10px;color:var(--mute);font-size:15px}
+table.fees{width:100%;border-collapse:collapse;font-size:15px}
+table.fees th,table.fees td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:start}
+table.fees th{color:var(--gold-hi);font-weight:500}
+.note{color:var(--mute);font-size:13px;margin-top:8px}
+
+footer{padding-block:48px 30px}
+footer .cols{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:30px}
+@media(max-width:760px){footer .cols{grid-template-columns:1fr}}
+footer h3{font:500 16px var(--font-b);color:var(--gold-hi);margin-bottom:10px}
+footer li{list-style:none;margin-bottom:6px;color:var(--bone)}
+footer a:hover{color:var(--gold-hi)}
+.copy{margin-top:34px;padding-top:16px;border-top:1px solid var(--line);color:var(--mute);font-size:14px}
+
+/* dialogs */
+dialog{background:var(--coal);color:var(--bone);border:1px solid var(--gold);border-radius:var(--r);padding:0;max-width:calc(100% - 24px)}
+dialog::backdrop{background:rgba(0,0,0,.72)}
+.dhead{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid var(--line)}
+.dhead h2{font:700 21px var(--font-d);color:var(--gold-hi)}
+.x{font-size:26px;line-height:1;padding:2px 10px;color:var(--bone)}
+.dbody{padding:20px}
+#cartDlg{margin:0;inset-block:0;inset-inline:auto 0;height:100%;max-height:none;width:min(430px,100%);border-width:0;border-inline-start:1px solid var(--gold);border-radius:0}
+#cartDlg[open]{display:flex;flex-direction:column}
+#cartDlg .dbody{flex:1;overflow:auto}
+.line{display:grid;grid-template-columns:64px 1fr auto;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);align-items:start}
+.line .pic{aspect-ratio:1;width:64px;border-radius:var(--r)}
+.line .pic svg{width:60%}
+.line h4{font:500 15px/1.4 var(--font-b)}
+.line small{color:var(--mute);display:block}
+.qty{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:var(--r);margin-top:6px}
+.qty button{width:30px;height:30px;font-size:18px}
+.qty span{min-width:28px;text-align:center}
+.rm{color:var(--danger);font-size:13px;text-decoration:underline}
+.cfoot{padding:16px 20px;border-top:1px solid var(--line);display:grid;gap:10px}
+.tot{display:flex;justify-content:space-between;font-size:15px;color:var(--mute)}
+.tot.big{font-size:19px;color:var(--bone);font-weight:700}
+.tot.big b{color:var(--gold-hi)}
+.btn{display:block;width:100%;background:var(--gold);color:#1a1405;font-weight:700;padding:12px;border-radius:var(--r);text-align:center}
+.btn:hover{background:var(--gold-hi)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn.ghost{background:transparent;border:1px solid var(--gold);color:var(--gold-hi)}
+
+#prodDlg,#coDlg,#okDlg{margin:auto;width:min(860px,100%)}
+#coDlg,#okDlg{width:min(560px,100%)}
+#prodDlg .in{display:grid;grid-template-columns:1fr 1fr}
+@media(max-width:700px){#prodDlg .in{grid-template-columns:1fr}}
+#prodDlg .pic{aspect-ratio:auto;min-height:300px;height:100%}
+#prodDlg .dbody{display:grid;gap:14px;align-content:start}
+#prodDlg h2{font:700 24px/1.3 var(--font-b)}
+.pdesc{color:var(--mute)}
+.lbl{color:var(--gold-hi);font-weight:500;margin-bottom:6px;display:block}
+.err{color:var(--danger);font-size:14px;min-height:1.4em}
+
+.f{display:grid;gap:14px}
+.f label{display:grid;gap:5px;font-weight:500;font-size:15px}
+.f input,.f select,.f textarea{background:var(--ink);border:1px solid var(--line);border-radius:var(--r);padding:10px 12px;width:100%}
+.f input:focus,.f select:focus,.f textarea:focus{border-color:var(--gold)}
+.f .two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:520px){.f .two{grid-template-columns:1fr}}
+.f [aria-invalid=true]{border-color:var(--danger)}
+.sum{border:1px solid var(--line);border-radius:var(--r);padding:12px 14px;display:grid;gap:6px;background:var(--ink)}
+.pay{font-size:14px;color:var(--mute)}
+.warn{background:rgba(201,162,75,.12);border:1px solid var(--line);border-radius:var(--r);padding:10px 12px;font-size:14px;color:var(--bone)}
+.toast{position:fixed;inset-inline:0;bottom:22px;margin-inline:auto;width:max-content;max-width:calc(100% - 32px);background:var(--gold);color:#1a1405;font-weight:700;padding:10px 20px;border-radius:99px;z-index:100;opacity:0;pointer-events:none;transition:opacity .2s}
+.toast.on{opacity:1}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
 </head>
 <body>
 
-<header>
-  <div class="logo">SALAHOMMES</div>
-  <p>الأناقة الكلاسيكية للرجل</p>
+<div class="demo" id="demo" hidden>
+  <span data-i18n="demo"></span>
+  <button type="button" id="demoX" data-i18n-aria="close">×</button>
+</div>
+
+<header class="top">
+  <div class="wrap bar">
+    <a href="#top" class="brand" aria-label="SALAHOMMES">
+      <!-- شعار مؤقت: استبدله بشعارك (SVG أو PNG) -->
+      <svg viewBox="0 0 48 48" aria-hidden="true">
+        <circle cx="24" cy="24" r="22" fill="none" stroke="#c9a24b" stroke-width="1.5"/>
+        <circle cx="24" cy="24" r="18" fill="none" stroke="#c9a24b" stroke-width=".6"/>
+        <path d="M31 17c-2-3-14-4-14 2 0 7 14 3 14 11 0 6-13 6-15 1" fill="none" stroke="#e6cf94" stroke-width="3" stroke-linecap="round"/>
+      </svg>
+      <b>SALAHOMMES</b>
+    </a>
+    <div class="search">
+      <label class="sr" for="q" data-i18n="search"></label>
+      <input id="q" type="search" autocomplete="off" data-i18n-ph="searchPh">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+    </div>
+    <div class="tools">
+      <button type="button" class="btn-i" id="langBtn" aria-label="Langue / اللغة">FR</button>
+      <button type="button" class="btn-i" id="cartBtn" data-i18n-aria="cart">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 8h14l-1.2 11H6.2z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+        <span class="count" id="cartCount">0</span>
+      </button>
+    </div>
+  </div>
 </header>
 
-<nav>
-  <a href="#home">الرئيسية</a>
-  <a href="#products">المنتجات</a>
-  <a href="#about">من نحن</a>
-  <a href="#contact">اتصل بنا</a>
-</nav>
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <h1>SALAHOMMES</h1>
+      <p><span data-i18n="heroP"></span><small data-i18n="heroS"></small></p>
+      <a class="cta" href="#shop" data-i18n="heroCta"></a>
+      <div class="tape" aria-hidden="true"><span>S</span><span>M</span><span>L</span><span>XL</span><span>XXL</span></div>
+    </div>
+  </section>
 
-<section class="hero" id="home">
-  <h1>أناقة تليق بك</h1>
-  <p>اكتشف تشكيلتنا من الملابس الرجالية الكلاسيكية<br>
-  الراحة، الجودة والأناقة في كل تفصيل.</p>
-  <a class="button" href="#products">اكتشف المنتجات</a>
-</section>
-
-<main id="products">
-  <h2>تشكيلة SALAHOMMES</h2>
-  <div class="products">
-
-    <article class="product">
-      <img src="https://images.unsplash.com/photo-1598033129183-c4f50c736f10?auto=format&fit=crop&w=700&q=80"
-           alt="قميص رجالي كلاسيكي">
-      <h3>قميص رجالي كلاسيكي</h3>
-      <p>أناقة وراحة للاستخدام اليومي</p>
-      <p class="price">3500 دج</p>
-      <a class="button" href="https://wa.me/213558464881?text=السلام%20عليكم،%20أريد%20الاستفسار%20عن%20القميص"
-         target="_blank" rel="noopener">اطلب عبر واتساب</a>
-    </article>
-
-    <article class="product">
-      <img src="https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?auto=format&fit=crop&w=700&q=80"
-           alt="سروال رجالي">
-      <h3>سروال رجالي كلاسيكي</h3>
-      <p>قصة مريحة ومظهر أنيق</p>
-      <p class="price">4000 دج</p>
-      <a class="button" href="https://wa.me/213558464881?text=السلام%20عليكم،%20أريد%20الاستفسار%20عن%20السروال"
-         target="_blank" rel="noopener">اطلب عبر واتساب</a>
-    </article>
-
-    <article class="product">
-      <img src="https://images.unsplash.com/photo-1617137968427-85924c800a22?auto=format&fit=crop&w=700&q=80"
-           alt="بدلة رجالية كلاسيكية">
-      <h3>بدلة رجالية كلاسيكية</h3>
-      <p>إطلالة راقية للمناسبات</p>
-      <p class="price">7000 دج</p>
-      <a class="button" href="https://wa.me/213558464881?text=السلام%20عليكم،%20أريد%20الاستفسار%20عن%20البدلة"
-         target="_blank" rel="noopener">اطلب عبر واتساب</a>
-    </article>
-
+  <div class="wrap">
+    <div class="cats" id="cats" role="group" data-i18n-aria="catsLbl"></div>
   </div>
 
-  <section class="about" id="about">
-    <h2>لماذا SALAHOMMES؟</h2>
-    <p>نهتم بتقديم ملابس رجالية تجمع بين الأناقة الكلاسيكية والراحة،
-    مع عناية خاصة بتجربة كل زبون.</p>
+  <section class="wrap shop" id="shop">
+    <details class="filters" id="filters" open>
+      <summary><span data-i18n="filters"></span></summary>
+      <div class="fgroup"><h3 data-i18n="size"></h3><div class="opts" id="fSizes"></div></div>
+      <div class="fgroup"><h3 data-i18n="color"></h3><div class="opts" id="fColors"></div></div>
+      <div class="fgroup">
+        <h3 data-i18n="maxPrice"></h3>
+        <input class="range" id="fPrice" type="range" data-i18n-aria="maxPrice">
+        <div class="rv"><span id="pMin"></span><span id="pCur"></span></div>
+      </div>
+      <button type="button" class="reset" id="reset" data-i18n="reset"></button>
+    </details>
+
+    <div>
+      <div class="head">
+        <p id="resCount" aria-live="polite"></p>
+        <label><span class="sr" data-i18n="sort"></span>
+          <select class="sort" id="sort">
+            <option value="def" data-i18n="sDef"></option>
+            <option value="asc" data-i18n="sAsc"></option>
+            <option value="desc" data-i18n="sDesc"></option>
+            <option value="disc" data-i18n="sDisc"></option>
+          </select>
+        </label>
+      </div>
+      <div class="grid" id="grid"></div>
+    </div>
+  </section>
+
+  <section class="delivery" id="delivery">
+    <div class="wrap cols">
+      <div>
+        <h2 data-i18n="delT"></h2>
+        <p data-i18n="delP1"></p>
+        <p data-i18n="delP2"></p>
+      </div>
+      <div>
+        <table class="fees">
+          <thead><tr><th data-i18n="zone"></th><th data-i18n="fee"></th></tr></thead>
+          <tbody id="feeBody"></tbody>
+        </table>
+        <p class="note" data-i18n="feeNote"></p>
+      </div>
+    </div>
   </section>
 </main>
 
-<footer id="contact">
-  <h2>تواصل معنا</h2>
-  <p>للاستفسار والطلب، تواصل معنا عبر واتساب.</p>
-  <a href="https://wa.me/213558464881" target="_blank" rel="noopener">
-    0558464881 — واتساب
-  </a>
-  <p>© SALAHOMMES</p>
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <b style="font:700 22px var(--font-d);letter-spacing:.12em;color:var(--gold-hi)">SALAHOMMES</b>
+        <p style="color:var(--mute);margin-top:8px" data-i18n="footP"></p>
+      </div>
+      <div>
+        <h3 data-i18n="contact"></h3>
+        <ul>
+          <li><a id="telLink" href="#" dir="ltr"></a></li>
+          <li id="addr"></li>
+        </ul>
+      </div>
+      <div>
+        <h3 data-i18n="follow"></h3>
+        <ul>
+          <li><a id="igLink" href="#" target="_blank" rel="noopener"></a></li>
+          <li><a id="ttLink" href="#" target="_blank" rel="noopener"></a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="copy">© <span id="yr"></span> SALAHOMMES</p>
+  </div>
 </footer>
 
+<!-- Cart -->
+<dialog id="cartDlg" aria-labelledby="cartT">
+  <div class="dhead"><h2 id="cartT" data-i18n="cart"></h2><button type="button" class="x" data-close data-i18n-aria="close">×</button></div>
+  <div class="dbody" id="cartBody"></div>
+  <div class="cfoot" id="cartFoot"></div>
+</dialog>
+
+<!-- Product -->
+<dialog id="prodDlg" aria-labelledby="pT">
+  <div class="in">
+    <div class="pic" id="pPic"></div>
+    <div class="dbody">
+      <div style="display:flex;justify-content:space-between;align-items:start;gap:10px">
+        <h2 id="pT"></h2>
+        <button type="button" class="x" data-close data-i18n-aria="close">×</button>
+      </div>
+      <div class="price" id="pPrice"></div>
+      <p class="pdesc" id="pDesc"></p>
+      <div><span class="lbl" data-i18n="size"></span><div class="opts" id="pSizes"></div></div>
+      <div><span class="lbl" data-i18n="color"></span><div class="opts" id="pColors"></div><small id="pColName" style="color:var(--mute)"></small></div>
+      <div class="err" id="pErr" role="alert"></div>
+      <button type="button" class="btn" id="pAdd" data-i18n="add"></button>
+    </div>
+  </div>
+</dialog>
+
+<!-- Checkout -->
+<dialog id="coDlg" aria-labelledby="coT">
+  <div class="dhead"><h2 id="coT" data-i18n="checkout"></h2><button type="button" class="x" data-close data-i18n-aria="close">×</button></div>
+  <form class="dbody f" id="coForm" novalidate>
+    <label><span data-i18n="name"></span><input name="name" autocomplete="name" required></label>
+    <label><span data-i18n="phone"></span><input name="phone" type="tel" inputmode="tel" autocomplete="tel" dir="ltr" placeholder="05XX XX XX XX" required></label>
+    <div class="two">
+      <label><span data-i18n="wilaya"></span><select name="wilaya" id="wilaya" required></select></label>
+      <label><span data-i18n="commune"></span><input name="commune" required></label>
+    </div>
+    <label><span data-i18n="address"></span><input name="address" autocomplete="street-address" required></label>
+    <label><span data-i18n="notes"></span><textarea name="notes" rows="2"></textarea></label>
+    <div class="sum" id="coSum"></div>
+    <p class="pay" data-i18n="payInfo"></p>
+    <div class="err" id="coErr" role="alert"></div>
+    <button type="submit" class="btn" data-i18n="confirm"></button>
+  </form>
+</dialog>
+
+<!-- Order done -->
+<dialog id="okDlg" aria-labelledby="okT">
+  <div class="dhead"><h2 id="okT"></h2><button type="button" class="x" data-close data-i18n-aria="close">×</button></div>
+  <div class="dbody f" id="okBody"></div>
+</dialog>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+/* =====================================================================
+   الإعدادات: عدّل هنا فقط
+   ===================================================================== */
+const CONFIG = {
+  STORE: "SALAHOMMES",
+  PHONE: "0558464881",
+  WHATSAPP: "213558464881",            // نفس الرقم بصيغة دولية
+  INSTAGRAM: "salahommes",
+  TIKTOK: "salahommes",
+  ADDRESS: { ar: "البليدة، الجزائر", fr: "Blida, Algérie" },
+  DEMO: true,                          // اجعلها false بعد إضافة منتجاتك الحقيقية
+  // عنوان API لاستقبال الطلبات (Backend + قاعدة بيانات). فارغ = لا يوجد حفظ في قاعدة بيانات.
+  // يستقبل POST بصيغة JSON، انظر دالة submitOrder.
+  ORDER_ENDPOINT: "",
+  // أسعار التوصيل التجريبية بالدينار حسب المنطقة. استبدلها بتعرفة ZR الفعلية.
+  ZONES: {
+    A: { fee: 400,  ar: "البليدة والولايات المجاورة", fr: "Blida et wilayas voisines" },
+    B: { fee: 600,  ar: "الشمال",                     fr: "Nord" },
+    C: { fee: 750,  ar: "الهضاب العليا",               fr: "Hauts plateaux" },
+    D: { fee: 1200, ar: "الجنوب",                      fr: "Sud" }
+  }
+};
+
+/* الولايات الـ 58: [الرقم, عربي, فرنسي, المنطقة] */
+const WILAYAS = [
+[1,"أدرار","Adrar","D"],[2,"الشلف","Chlef","B"],[3,"الأغواط","Laghouat","C"],[4,"أم البواقي","Oum El Bouaghi","C"],
+[5,"باتنة","Batna","C"],[6,"بجاية","Béjaïa","B"],[7,"بسكرة","Biskra","D"],[8,"بشار","Béchar","D"],
+[9,"البليدة","Blida","A"],[10,"البويرة","Bouira","A"],[11,"تمنراست","Tamanrasset","D"],[12,"تبسة","Tébessa","C"],
+[13,"تلمسان","Tlemcen","B"],[14,"تيارت","Tiaret","C"],[15,"تيزي وزو","Tizi Ouzou","B"],[16,"الجزائر","Alger","A"],
+[17,"الجلفة","Djelfa","C"],[18,"جيجل","Jijel","B"],[19,"سطيف","Sétif","B"],[20,"سعيدة","Saïda","C"],
+[21,"سكيكدة","Skikda","B"],[22,"سيدي بلعباس","Sidi Bel Abbès","B"],[23,"عنابة","Annaba","B"],[24,"قالمة","Guelma","B"],
+[25,"قسنطينة","Constantine","B"],[26,"المدية","Médéa","A"],[27,"مستغانم","Mostaganem","B"],[28,"المسيلة","M'Sila","C"],
+[29,"معسكر","Mascara","B"],[30,"ورقلة","Ouargla","D"],[31,"وهران","Oran","B"],[32,"البيض","El Bayadh","C"],
+[33,"إليزي","Illizi","D"],[34,"برج بوعريريج","Bordj Bou Arréridj","B"],[35,"بومرداس","Boumerdès","A"],[36,"الطارف","El Tarf","B"],
+[37,"تندوف","Tindouf","D"],[38,"تيسمسيلت","Tissemsilt","C"],[39,"الوادي","El Oued","D"],[40,"خنشلة","Khenchela","C"],
+[41,"سوق أهراس","Souk Ahras","B"],[42,"تيبازة","Tipaza","A"],[43,"ميلة","Mila","B"],[44,"عين الدفلى","Aïn Defla","A"],
+[45,"النعامة","Naâma","C"],[46,"عين تموشنت","Aïn Témouchent","B"],[47,"غرداية","Ghardaïa","D"],[48,"غليزان","Relizane","B"],
+[49,"المغير","El M'Ghair","D"],[50,"المنيعة","El Menia","D"],[51,"أولاد جلال","Ouled Djellal","D"],[52,"برج باجي مختار","Bordj Badji Mokhtar","D"],
+[53,"بني عباس","Béni Abbès","D"],[54,"تيميمون","Timimoun","D"],[55,"تقرت","Touggourt","D"],[56,"جانت","Djanet","D"],
+[57,"عين صالح","In Salah","D"],[58,"عين قزام","In Guezzam","D"]
+];
+
+/* الألوان */
+const COLORS = {
+  noir:{hex:"#141414",ar:"أسود",fr:"Noir"}, blanc:{hex:"#f1eee6",ar:"أبيض",fr:"Blanc"},
+  bleu:{hex:"#3d5f94",ar:"أزرق",fr:"Bleu"}, marine:{hex:"#1b2a4a",ar:"كحلي",fr:"Marine"},
+  gris:{hex:"#77777a",ar:"رمادي",fr:"Gris"}, beige:{hex:"#cdb78f",ar:"بيج",fr:"Beige"},
+  bordeaux:{hex:"#5b1a29",ar:"عنابي",fr:"Bordeaux"}, vert:{hex:"#2a4a35",ar:"أخضر",fr:"Vert"}
+};
+
+const CATS = [
+  {id:"chemises", ar:"قمصان", fr:"Chemises"},
+  {id:"pantalons", ar:"سراويل", fr:"Pantalons"},
+  {id:"vestes", ar:"سترات", fr:"Vestes"},
+  {id:"costumes", ar:"بدلات", fr:"Costumes"},
+  {id:"manteaux", ar:"معاطف", fr:"Manteaux"}
+];
+
+const S_TOP = ["S","M","L","XL","XXL"], S_PANT = ["38","40","42","44","46"], S_SUIT = ["46","48","50","52","54","56"];
+
+/* المنتجات: تجريبية. استبدلها بمنتجاتك.
+   image: ضع رابط صورة المنتج (اختياري). oldPrice: السعر قبل التخفيض (يظهر في العروض). */
+const PRODUCTS = [
+ {id:1, cat:"chemises", price:4200, sizes:S_TOP, colors:["blanc","bleu"], tone:"#2b2a26",
+  name:{ar:"قميص أكسفورد بقصّة ضيّقة",fr:"Chemise Oxford Slim"}, desc:{ar:"قطن مريح بقصّة محكمة للدوام اليومي.",fr:"Coton confortable, coupe ajustée pour tous les jours."}},
+ {id:2, cat:"chemises", price:3800, oldPrice:4800, sizes:S_TOP, colors:["beige","blanc","vert"], tone:"#34302a",
+  name:{ar:"قميص كتّان صيفي",fr:"Chemise en lin d'été"}, desc:{ar:"قماش خفيف يتنفّس في الحر.",fr:"Tissu léger et respirant pour la chaleur."}},
+ {id:3, cat:"chemises", price:4500, sizes:S_TOP, colors:["noir","bordeaux"], tone:"#201b1b",
+  name:{ar:"قميص ساتان للسهرة",fr:"Chemise satin de soirée"}, desc:{ar:"لمعة ناعمة للمناسبات.",fr:"Brillance discrète pour les occasions."}},
+ {id:4, cat:"pantalons", price:4900, sizes:S_PANT, colors:["beige","marine","gris"], tone:"#2a2822",
+  name:{ar:"سروال شينو",fr:"Pantalon chino"}, desc:{ar:"قصّة مستقيمة وقماش قطني متين.",fr:"Coupe droite en coton résistant."}},
+ {id:5, cat:"pantalons", price:5500, oldPrice:6500, sizes:S_PANT, colors:["noir","gris"], tone:"#232321",
+  name:{ar:"سروال كلاسيكي",fr:"Pantalon classique"}, desc:{ar:"مناسب للبدلات والعمل.",fr:"Idéal avec un costume ou au bureau."}},
+ {id:6, cat:"pantalons", price:5200, sizes:S_PANT, colors:["gris","marine"], tone:"#262a30",
+  name:{ar:"سروال فلانيل",fr:"Pantalon flanelle"}, desc:{ar:"دافئ وأنيق لفصل الشتاء.",fr:"Chaud et élégant pour l'hiver."}},
+ {id:7, cat:"vestes", price:11800, sizes:S_TOP, colors:["marine","noir"], tone:"#1f232d",
+  name:{ar:"بليزر رسمي",fr:"Blazer habillé"}, desc:{ar:"سترة بقصّة أنيقة تناسب القميص والتي‑شيرت.",fr:"Veste structurée, avec chemise ou t-shirt."}},
+ {id:8, cat:"vestes", price:9500, oldPrice:11500, sizes:S_TOP, colors:["noir","vert"], tone:"#1d221e",
+  name:{ar:"جاكيت بومبر",fr:"Bomber"}, desc:{ar:"جاكيت خفيف للمواسم الانتقالية.",fr:"Veste légère pour la mi-saison."}},
+ {id:9, cat:"costumes", price:24500, sizes:S_SUIT, colors:["noir","marine","gris"], tone:"#1a1a1c",
+  name:{ar:"بدلة قطعتين",fr:"Costume deux pièces"}, desc:{ar:"سترة وسروال بقماش مريح.",fr:"Veste et pantalon, tissu confortable."}},
+ {id:10, cat:"costumes", price:32000, oldPrice:38000, sizes:S_SUIT, colors:["noir","bordeaux"], tone:"#241a1d",
+  name:{ar:"بدلة الأفراح",fr:"Costume de cérémonie"}, desc:{ar:"بدلة كاملة للأعراس والمناسبات.",fr:"Costume complet pour mariages et fêtes."}},
+ {id:11, cat:"manteaux", price:17900, sizes:S_TOP, colors:["noir","gris","beige"], tone:"#22211e",
+  name:{ar:"معطف صوف طويل",fr:"Manteau long en laine"}, desc:{ar:"دفء وأناقة في البرد.",fr:"Chaleur et allure pour le froid."}},
+ {id:12, cat:"manteaux", price:15500, oldPrice:18500, sizes:S_TOP, colors:["beige","marine"], tone:"#2c2923",
+  name:{ar:"معطف ترانش",fr:"Trench"}, desc:{ar:"مقاوم للمطر بقصّة كلاسيكية.",fr:"Coupe classique, résiste à la pluie."}}
+];
+
+/* رسومات القطع عندما لا توجد صورة */
+const GLYPH = {
+ chemises:'<path d="M35 18 20 28 12 48l12 4 4-8v40h44V44l4 8 12-4-8-20-15-10-15 12z"/><path d="M50 30v54"/>',
+ pantalons:'<path d="M32 14h36l4 74H54L50 40 46 88H28z"/><path d="M32 22h36"/>',
+ vestes:'<path d="M36 14 18 24 12 60l12 2 2 28h48l2-28 12-2-6-36-18-10-14 36z"/><path d="M50 50v40"/>',
+ costumes:'<path d="M36 14 18 24 12 60l12 2 2 28h48l2-28 12-2-6-36-18-10-14 36z"/><path d="M50 50l-4 10 4 18 4-18z"/>',
+ manteaux:'<path d="M34 12 16 22 10 62l12 2 2 30h52l2-30 12-2-6-40-18-10-16 32z"/><path d="M50 44v50"/>'
+};
+const glyph = c => `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true">${GLYPH[c]}</svg>`;
+
+/* =====================================================================
+   النصوص (عربي / فرنسي)
+   ===================================================================== */
+const T = {
+ar:{
+ demo:"منتجات وأسعار تجريبية: استبدلها بمنتجاتك قبل النشر.", close:"إغلاق",
+ search:"بحث", searchPh:"ابحث عن قميص، بدلة، معطف...", cart:"السلة",
+ heroP:"ملابس رجالية من البليدة: قمصان، سراويل، سترات، بدلات ومعاطف.",
+ heroS:"التوصيل إلى 58 ولاية والدفع عند الاستلام.", heroCta:"تسوّق الآن",
+ catsLbl:"الفئات", all:"الكل", promos:"العروض",
+ filters:"تصفية النتائج", size:"المقاس", color:"اللون", maxPrice:"أقصى سعر", reset:"مسح الفلاتر",
+ sort:"الترتيب", sDef:"الترتيب الافتراضي", sAsc:"السعر: من الأقل", sDesc:"السعر: من الأعلى", sDisc:"الأكثر تخفيضًا",
+ results:n=>n===1?"منتج واحد":`${n} منتجات`, none:"لا توجد منتجات تطابق بحثك.", clear:"مسح الفلاتر",
+ add:"أضف إلى السلة", pickSize:"اختر المقاس.", pickColor:"اختر اللون.", added:"أُضيف إلى السلة",
+ off:p=>`-${p}%`,
+ cartEmpty:"السلة فارغة. أضف منتجًا لتبدأ.", sub:"المجموع", shipEst:"التوصيل", shipAt:"يُحسب عند إتمام الطلب",
+ order:"إتمام الطلب", remove:"حذف", qty:"الكمية",
+ checkout:"بيانات التوصيل", name:"الاسم الكامل", phone:"رقم الهاتف", wilaya:"الولاية", commune:"البلدية", address:"العنوان",
+ notes:"ملاحظات (اختياري)", pickW:"اختر الولاية", ship:"التوصيل", total:"الإجمالي",
+ payInfo:"الدفع عند الاستلام. يتصل بك فريقنا لتأكيد الطلب.", confirm:"تأكيد الطلب",
+ eName:"أدخل اسمك الكامل.", ePhone:"أدخل رقم هاتف جزائري صحيح (مثال: 0558464881).", eW:"اختر الولاية.", eC:"أدخل البلدية.", eA:"أدخل العنوان.",
+ eSend:"تعذّر إرسال الطلب. تحقق من الاتصال وأعد المحاولة.",
+ sending:"جارٍ الإرسال...",
+ okSent:"تم تسجيل طلبك", okSentP:ref=>`رقم الطلب: ${ref}. سنتصل بك لتأكيد التوصيل.`,
+ okWa:"أكمل الطلب عبر واتساب", okWaP:ref=>`رقم الطلب: ${ref}. لم يُحفظ الطلب على خادم بعد، فأرسله إلينا عبر واتساب لنؤكّده.`,
+ waBtn:"أرسل الطلب عبر واتساب", done:"تم",
+ delT:"التوصيل والدفع", delP1:"نوصّل إلى 58 ولاية عبر شركة ZR، والدفع نقدًا عند استلام الطلب.", delP2:"يختلف سعر التوصيل حسب الولاية ويظهر في الطلب قبل التأكيد.",
+ zone:"المنطقة", fee:"السعر", feeNote:"الأسعار الظاهرة للتجربة وتُعدَّل حسب تعرفة ZR.",
+ footP:"ملابس رجالية بقصّات أنيقة من البليدة.", contact:"تواصل معنا", follow:"تابعنا", da:"د.ج",
+ waHead:"طلب جديد من SALAHOMMES"
+},
+fr:{
+ demo:"Produits et prix de démonstration : remplacez-les par les vôtres avant la mise en ligne.", close:"Fermer",
+ search:"Rechercher", searchPh:"Chercher une chemise, un costume, un manteau...", cart:"Panier",
+ heroP:"Mode homme depuis Blida : chemises, pantalons, vestes, costumes et manteaux.",
+ heroS:"Livraison dans 58 wilayas, paiement à la livraison.", heroCta:"Voir la collection",
+ catsLbl:"Catégories", all:"Tout", promos:"Promotions",
+ filters:"Filtrer", size:"Taille", color:"Couleur", maxPrice:"Prix maximum", reset:"Réinitialiser les filtres",
+ sort:"Trier", sDef:"Ordre par défaut", sAsc:"Prix croissant", sDesc:"Prix décroissant", sDisc:"Plus fortes remises",
+ results:n=>n<=1?`${n} article`:`${n} articles`, none:"Aucun article ne correspond à votre recherche.", clear:"Réinitialiser les filtres",
+ add:"Ajouter au panier", pickSize:"Choisissez une taille.", pickColor:"Choisissez une couleur.", added:"Ajouté au panier",
+ off:p=>`-${p}%`,
+ cartEmpty:"Votre panier est vide. Ajoutez un article pour commencer.", sub:"Sous-total", shipEst:"Livraison", shipAt:"Calculée à la commande",
+ order:"Commander", remove:"Retirer", qty:"Quantité",
+ checkout:"Informations de livraison", name:"Nom complet", phone:"Téléphone", wilaya:"Wilaya", commune:"Commune", address:"Adresse",
+ notes:"Remarques (facultatif)", pickW:"Choisir la wilaya", ship:"Livraison", total:"Total",
+ payInfo:"Paiement à la livraison. Nous vous appelons pour confirmer la commande.", confirm:"Confirmer la commande",
+ eName:"Saisissez votre nom complet.", ePhone:"Saisissez un numéro algérien valide (ex. 0558464881).", eW:"Choisissez la wilaya.", eC:"Saisissez la commune.", eA:"Saisissez l'adresse.",
+ eSend:"La commande n'a pas pu être envoyée. Vérifiez la connexion et réessayez.",
+ sending:"Envoi en cours...",
+ okSent:"Commande enregistrée", okSentP:ref=>`Commande n° ${ref}. Nous vous appelons pour confirmer la livraison.`,
+ okWa:"Terminez la commande sur WhatsApp", okWaP:ref=>`Commande n° ${ref}. Elle n'est pas encore enregistrée sur un serveur : envoyez-la nous sur WhatsApp pour confirmation.`,
+ waBtn:"Envoyer la commande sur WhatsApp", done:"Terminé",
+ delT:"Livraison et paiement", delP1:"Nous livrons dans 58 wilayas avec ZR, paiement en espèces à la réception.", delP2:"Le tarif dépend de la wilaya et s'affiche dans la commande avant confirmation.",
+ zone:"Zone", fee:"Tarif", feeNote:"Tarifs indicatifs de démonstration, à ajuster selon la grille ZR.",
+ footP:"Mode homme aux coupes soignées, depuis Blida.", contact:"Contact", follow:"Suivez-nous", da:"DA",
+ waHead:"Nouvelle commande SALAHOMMES"
+}};
+
+/* =====================================================================
+   الحالة والأدوات
+   ===================================================================== */
+const $ = (s,r=document)=>r.querySelector(s);
+const $$ = (s,r=document)=>[...r.querySelectorAll(s)];
+const store = {
+  get(k,d){try{const v=localStorage.getItem(k);return v==null?d:JSON.parse(v)}catch(e){return d}},
+  set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+};
+const state = {
+  lang: store.get("sh_lang","ar"),
+  cat:"all", q:"", sizes:new Set(), colors:new Set(), max:0, sort:"def",
+  cart: store.get("sh_cart",[]),
+  sel:{size:null,color:null,id:null}
+};
+const t = k => T[state.lang][k];
+const L = o => o[state.lang];
+const money = n => String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g,"\u202f")+"\u00a0"+t("da");
+const byId = id => PRODUCTS.find(p=>p.id===id);
+const esc = s => String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const pct = p => p.oldPrice ? Math.round((1-p.price/p.oldPrice)*100) : 0;
+const ALL_SIZES = [...new Set(PRODUCTS.flatMap(p=>p.sizes))].sort((a,b)=>{
+  const o=["S","M","L","XL","XXL"],ia=o.indexOf(a),ib=o.indexOf(b);
+  if(ia>-1&&ib>-1)return ia-ib; if(ia>-1)return -1; if(ib>-1)return 1; return a-b;});
+const ALL_COLORS = [...new Set(PRODUCTS.flatMap(p=>p.colors))];
+const PMIN = Math.min(...PRODUCTS.map(p=>p.price)), PMAX = Math.max(...PRODUCTS.map(p=>p.price));
+state.max = PMAX;
+
+let toastTimer;
+function toast(msg){const e=$("#toast");e.textContent=msg;e.classList.add("on");clearTimeout(toastTimer);toastTimer=setTimeout(()=>e.classList.remove("on"),2200)}
+const saveCart = () => store.set("sh_cart",state.cart);
+
+/* =====================================================================
+   اللغة
+   ===================================================================== */
+function applyLang(){
+  const l=state.lang;
+  document.documentElement.lang=l; document.documentElement.dir=l==="ar"?"rtl":"ltr";
+  $("#langBtn").textContent=l==="ar"?"FR":"عربي";
+  $$("[data-i18n]").forEach(e=>e.textContent=t(e.dataset.i18n));
+  $$("[data-i18n-ph]").forEach(e=>e.placeholder=t(e.dataset.i18nPh));
+  $$("[data-i18n-aria]").forEach(e=>e.setAttribute("aria-label",t(e.dataset.i18nAria)));
+  $("#addr").textContent=L(CONFIG.ADDRESS);
+  $("#telLink").textContent=CONFIG.PHONE; $("#telLink").href="tel:"+CONFIG.PHONE;
+  $("#igLink").textContent="Instagram @"+CONFIG.INSTAGRAM; $("#igLink").href="https://www.instagram.com/"+CONFIG.INSTAGRAM;
+  $("#ttLink").textContent="TikTok @"+CONFIG.TIKTOK; $("#ttLink").href="https://www.tiktok.com/@"+CONFIG.TIKTOK;
+  document.title = l==="ar" ? "SALAHOMMES | ملابس رجالية" : "SALAHOMMES | Mode homme";
+  renderCats(); renderFilters(); renderGrid(); renderCart(); renderFees(); renderWilayas();
+  if($("#prodDlg").open) openProduct(state.sel.id,true);
+  if($("#coDlg").open) renderCoSum();
+}
+
+/* =====================================================================
+   العرض
+   ===================================================================== */
+function renderCats(){
+  const items=[{id:"all",label:t("all")},...CATS.map(c=>({id:c.id,label:L(c)})),{id:"promo",label:t("promos"),promo:true}];
+  $("#cats").innerHTML=items.map(i=>`<button type="button" class="chip${i.promo?" promo":""}" data-cat="${i.id}" aria-pressed="${state.cat===i.id}">${esc(i.label)}</button>`).join("");
+}
+function renderFilters(){
+  $("#fSizes").innerHTML=ALL_SIZES.map(s=>`<button type="button" class="opt" data-size="${s}" aria-pressed="${state.sizes.has(s)}">${s}</button>`).join("");
+  $("#fColors").innerHTML=ALL_COLORS.map(c=>`<button type="button" class="sw" data-color="${c}" style="background:${COLORS[c].hex}" aria-label="${esc(L(COLORS[c]))}" title="${esc(L(COLORS[c]))}" aria-pressed="${state.colors.has(c)}"></button>`).join("");
+  const r=$("#fPrice"); r.min=PMIN; r.max=PMAX; r.step=100; r.value=state.max;
+  $("#pMin").textContent=money(PMIN); $("#pCur").textContent=money(state.max);
+}
+function filtered(){
+  const q=state.q.trim().toLowerCase();
+  let list=PRODUCTS.filter(p=>{
+    if(state.cat==="promo"){ if(!p.oldPrice) return false; }
+    else if(state.cat!=="all" && p.cat!==state.cat) return false;
+    if(q){
+      const hay=[p.name.ar,p.name.fr,p.desc.ar,p.desc.fr,...p.colors.map(c=>COLORS[c].ar+" "+COLORS[c].fr),CATS.find(c=>c.id===p.cat).ar,CATS.find(c=>c.id===p.cat).fr].join(" ").toLowerCase();
+      if(!hay.includes(q)) return false;
+    }
+    if(state.sizes.size && !p.sizes.some(s=>state.sizes.has(s))) return false;
+    if(state.colors.size && !p.colors.some(c=>state.colors.has(c))) return false;
+    if(p.price>state.max) return false;
+    return true;
+  });
+  if(state.sort==="asc") list.sort((a,b)=>a.price-b.price);
+  if(state.sort==="desc") list.sort((a,b)=>b.price-a.price);
+  if(state.sort==="disc") list.sort((a,b)=>pct(b)-pct(a));
+  return list;
+}
+function pic(p){
+  return `<div class="pic" style="--tone:${p.tone||"#222"}">${p.image?`<img src="${esc(p.image)}" alt="${esc(L(p.name))}" loading="lazy">`:glyph(p.cat)}${p.oldPrice?`<span class="badge">${t("off")(pct(p))}</span>`:""}</div>`;
+}
+function priceHtml(p){return `<b>${money(p.price)}</b>${p.oldPrice?`<s>${money(p.oldPrice)}</s>`:""}`}
+function renderGrid(){
+  const list=filtered();
+  $("#resCount").textContent=t("results")(list.length);
+  $("#grid").innerHTML=list.length?list.map(p=>`
+    <button type="button" class="card" data-open="${p.id}">
+      ${pic(p)}
+      <span class="info"><h3>${esc(L(p.name))}</h3>
+        <span class="price">${priceHtml(p)}</span>
+        <span class="dots">${p.colors.map(c=>`<i style="background:${COLORS[c].hex}" title="${esc(L(COLORS[c]))}"></i>`).join("")}</span>
+      </span>
+    </button>`).join("")
+   : `<div class="empty"><p>${t("none")}</p><button type="button" data-reset>${t("clear")}</button></div>`;
+}
+function renderFees(){
+  $("#feeBody").innerHTML=Object.values(CONFIG.ZONES).map(z=>`<tr><td>${esc(L(z))}</td><td>${money(z.fee)}</td></tr>`).join("");
+}
+function renderWilayas(){
+  const sel=$("#wilaya"), cur=sel.value;
+  sel.innerHTML=`<option value="">${t("pickW")}</option>`+WILAYAS.map(w=>`<option value="${w[0]}">${String(w[0]).padStart(2,"0")} - ${esc(state.lang==="ar"?w[1]:w[2])}</option>`).join("");
+  sel.value=cur;
+}
+
+/* المنتج */
+function openProduct(id,keep){
+  const p=byId(id); if(!p) return;
+  if(!keep) state.sel={size:null,color:null,id};
+  $("#pPic").outerHTML=`<div class="pic" id="pPic" style="--tone:${p.tone||"#222"}">${p.image?`<img src="${esc(p.image)}" alt="${esc(L(p.name))}">`:glyph(p.cat)}${p.oldPrice?`<span class="badge">${t("off")(pct(p))}</span>`:""}</div>`;
+  $("#pT").textContent=L(p.name); $("#pPrice").innerHTML=priceHtml(p); $("#pDesc").textContent=L(p.desc);
+  $("#pSizes").innerHTML=p.sizes.map(s=>`<button type="button" class="opt" data-psize="${s}" aria-pressed="${state.sel.size===s}">${s}</button>`).join("");
+  $("#pColors").innerHTML=p.colors.map(c=>`<button type="button" class="sw" data-pcolor="${c}" style="background:${COLORS[c].hex}" aria-label="${esc(L(COLORS[c]))}" aria-pressed="${state.sel.color===c}"></button>`).join("");
+  $("#pColName").textContent=state.sel.color?L(COLORS[state.sel.color]):"";
+  $("#pErr").textContent="";
+  if(!$("#prodDlg").open) $("#prodDlg").showModal();
+}
+
+/* السلة */
+const cartCount=()=>state.cart.reduce((n,i)=>n+i.qty,0);
+const cartSub=()=>state.cart.reduce((n,i)=>n+byId(i.id).price*i.qty,0);
+function renderCart(){
+  $("#cartCount").textContent=cartCount();
+  const body=$("#cartBody"), foot=$("#cartFoot");
+  if(!state.cart.length){
+    body.innerHTML=`<p style="color:var(--mute)">${t("cartEmpty")}</p>`; foot.innerHTML=""; return;
+  }
+  body.innerHTML=state.cart.map((i,idx)=>{const p=byId(i.id);return `
+    <div class="line">
+      ${pic({...p,oldPrice:0})}
+      <div><h4>${esc(L(p.name))}</h4>
+        <small>${esc(i.size)} / ${esc(L(COLORS[i.color]))}</small>
+        <div class="qty" role="group" aria-label="${t("qty")}"><button type="button" data-dec="${idx}" aria-label="-">-</button><span>${i.qty}</span><button type="button" data-inc="${idx}" aria-label="+">+</button></div>
+      </div>
+      <div style="text-align:end"><b>${money(p.price*i.qty)}</b><br><button type="button" class="rm" data-rm="${idx}">${t("remove")}</button></div>
+    </div>`}).join("");
+  foot.innerHTML=`
+    <div class="tot"><span>${t("sub")}</span><span>${money(cartSub())}</span></div>
+    <div class="tot"><span>${t("shipEst")}</span><span>${t("shipAt")}</span></div>
+    <button type="button" class="btn" id="goCheckout">${t("order")}</button>`;
+}
+function addToCart(id,size,color){
+  const f=state.cart.find(i=>i.id===id&&i.size===size&&i.color===color);
+  if(f) f.qty++; else state.cart.push({id,size,color,qty:1});
+  saveCart(); renderCart();
+}
+
+/* الطلب */
+const shipFee=w=>{const x=WILAYAS.find(v=>v[0]===+w);return x?CONFIG.ZONES[x[3]].fee:null};
+function renderCoSum(){
+  const w=$("#wilaya").value, fee=w?shipFee(w):null, sub=cartSub();
+  $("#coSum").innerHTML=`
+    <div class="tot"><span>${t("sub")}</span><span>${money(sub)}</span></div>
+    <div class="tot"><span>${t("ship")}</span><span>${fee==null?"-":money(fee)}</span></div>
+    <div class="tot big"><span>${t("total")}</span><b>${money(sub+(fee||0))}</b></div>`;
+}
+const validPhone=v=>/^(0|\+?213)[567]\d{8}$/.test(v.replace(/[\s.\-]/g,""));
+function buildOrder(f){
+  const w=WILAYAS.find(v=>v[0]===+f.wilaya), fee=shipFee(f.wilaya), sub=cartSub();
+  return {
+    ref:"SH-"+Date.now().toString(36).toUpperCase(),
+    createdAt:new Date().toISOString(),
+    customer:{name:f.name.trim(),phone:f.phone.replace(/[\s.\-]/g,""),wilayaCode:w[0],wilaya:w[2],commune:f.commune.trim(),address:f.address.trim(),notes:f.notes.trim()},
+    items:state.cart.map(i=>{const p=byId(i.id);return {productId:p.id,name:p.name.fr,size:i.size,color:COLORS[i.color].fr,qty:i.qty,unitPrice:p.price}}),
+    subtotal:sub, shipping:fee, total:sub+fee, payment:"cod", courier:"zr"
+  };
+}
+function waText(o){
+  const lines=[t("waHead")+" #"+o.ref,"",
+    ...o.items.map(i=>`- ${i.name} | ${i.size} | ${i.color} | x${i.qty} | ${i.unitPrice*i.qty} DA`),"",
+    `Sous-total: ${o.subtotal} DA`,`Livraison (${o.customer.wilaya}): ${o.shipping} DA`,`Total: ${o.total} DA (COD)`,"",
+    `${o.customer.name} | ${o.customer.phone}`,`${o.customer.wilayaCode} ${o.customer.wilaya}, ${o.customer.commune}`,o.customer.address];
+  if(o.customer.notes) lines.push("Note: "+o.customer.notes);
+  return lines.join("\n");
+}
+async function submitOrder(o){
+  if(!CONFIG.ORDER_ENDPOINT) return {saved:false};
+  const r=await fetch(CONFIG.ORDER_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(o)});
+  if(!r.ok) throw new Error("HTTP "+r.status);
+  return {saved:true};
+}
+
+/* =====================================================================
+   الأحداث
+   ===================================================================== */
+document.addEventListener("click",e=>{
+  const b=e.target.closest("button,a"); if(!b) return;
+  if(b.dataset.cat){state.cat=b.dataset.cat;renderCats();renderGrid();}
+  else if(b.dataset.size){const s=b.dataset.size;state.sizes.has(s)?state.sizes.delete(s):state.sizes.add(s);renderFilters();renderGrid();}
+  else if(b.dataset.color){const c=b.dataset.color;state.colors.has(c)?state.colors.delete(c):state.colors.add(c);renderFilters();renderGrid();}
+  else if(b.id==="reset"||b.hasAttribute("data-reset")) resetAll();
+  else if(b.dataset.open) openProduct(+b.dataset.open);
+  else if(b.dataset.psize){state.sel.size=b.dataset.psize;openProduct(state.sel.id,true);}
+  else if(b.dataset.pcolor){state.sel.color=b.dataset.pcolor;openProduct(state.sel.id,true);}
+  else if(b.id==="pAdd"){
+    if(!state.sel.size){$("#pErr").textContent=t("pickSize");return}
+    if(!state.sel.color){$("#pErr").textContent=t("pickColor");return}
+    addToCart(state.sel.id,state.sel.size,state.sel.color);
+    $("#prodDlg").close(); toast(t("added"));
+  }
+  else if(b.dataset.inc!==undefined){state.cart[+b.dataset.inc].qty++;saveCart();renderCart();}
+  else if(b.dataset.dec!==undefined){const i=state.cart[+b.dataset.dec];i.qty--;if(i.qty<1)state.cart.splice(+b.dataset.dec,1);saveCart();renderCart();}
+  else if(b.dataset.rm!==undefined){state.cart.splice(+b.dataset.rm,1);saveCart();renderCart();}
+  else if(b.id==="goCheckout"){$("#cartDlg").close();renderCoSum();$("#coErr").textContent="";$("#coDlg").showModal();}
+  else if(b.hasAttribute("data-close")) b.closest("dialog").close();
+});
+function resetAll(){
+  state.cat="all";state.q="";state.sizes.clear();state.colors.clear();state.max=PMAX;state.sort="def";
+  $("#q").value="";$("#sort").value="def";renderCats();renderFilters();renderGrid();
+}
+$("#q").addEventListener("input",e=>{state.q=e.target.value;renderGrid()});
+$("#sort").addEventListener("change",e=>{state.sort=e.target.value;renderGrid()});
+$("#fPrice").addEventListener("input",e=>{state.max=+e.target.value;$("#pCur").textContent=money(state.max);renderGrid()});
+$("#langBtn").addEventListener("click",()=>{state.lang=state.lang==="ar"?"fr":"ar";store.set("sh_lang",state.lang);applyLang()});
+$("#cartBtn").addEventListener("click",()=>$("#cartDlg").showModal());
+$("#wilaya").addEventListener("change",renderCoSum);
+$("#demoX").addEventListener("click",()=>$("#demo").hidden=true);
+$$("dialog").forEach(d=>d.addEventListener("click",e=>{if(e.target===d)d.close()}));
+
+$("#coForm").addEventListener("submit",async e=>{
+  e.preventDefault();
+  const form=e.target, f=Object.fromEntries(new FormData(form).entries()), err=$("#coErr");
+  $$("[aria-invalid]",form).forEach(x=>x.removeAttribute("aria-invalid"));
+  const bad=(name,msg)=>{const el=form.elements[name];el.setAttribute("aria-invalid","true");el.focus();err.textContent=msg};
+  if(!state.cart.length){err.textContent=t("cartEmpty");return}
+  if(f.name.trim().length<3) return bad("name",t("eName"));
+  if(!validPhone(f.phone)) return bad("phone",t("ePhone"));
+  if(!f.wilaya) return bad("wilaya",t("eW"));
+  if(!f.commune.trim()) return bad("commune",t("eC"));
+  if(f.address.trim().length<4) return bad("address",t("eA"));
+  err.textContent="";
+  const btn=$("button[type=submit]",form), label=btn.textContent; btn.disabled=true; btn.textContent=t("sending");
+  const order=buildOrder(f);
+  try{
+    const res=await submitOrder(order);
+    $("#coDlg").close();
+    const ok=$("#okDlg"), body=$("#okBody");
+    if(res.saved){
+      $("#okT").textContent=t("okSent");
+      body.innerHTML=`<p>${esc(t("okSentP")(order.ref))}</p><button type="button" class="btn" data-close>${t("done")}</button>`;
+    }else{
+      $("#okT").textContent=t("okWa");
+      const url=`https://wa.me/${CONFIG.WHATSAPP}?text=${encodeURIComponent(waText(order))}`;
+      body.innerHTML=`<p class="warn">${esc(t("okWaP")(order.ref))}</p>
+        <a class="btn" href="${url}" target="_blank" rel="noopener">${t("waBtn")}</a>
+        <button type="button" class="btn ghost" data-close>${t("done")}</button>`;
+    }
+    state.cart=[];saveCart();renderCart();form.reset();
+    ok.showModal();
+  }catch(x){err.textContent=t("eSend")}
+  finally{btn.disabled=false;btn.textContent=label}
+});
+
+/* تشغيل */
+$("#yr").textContent=new Date().getFullYear();
+if(CONFIG.DEMO) $("#demo").hidden=false;
+if(window.matchMedia("(max-width:860px)").matches) $("#filters").open=false;
+applyLang();
+</script>
 </body>
 </html>
